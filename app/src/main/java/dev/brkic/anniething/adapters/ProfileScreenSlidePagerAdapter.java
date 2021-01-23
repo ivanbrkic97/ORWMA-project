@@ -1,38 +1,53 @@
 package dev.brkic.anniething.adapters;
 
+import android.content.Context;
+
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.Locale;
 
+import dev.brkic.anniething.R;
+import dev.brkic.anniething.fragments.ChampionRotationFragment;
 import dev.brkic.anniething.fragments.InfoFragment;
+import dev.brkic.anniething.fragments.StatusFragment;
 
-public class ProfileScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-    private static final int NUM_PAGES = 3;
-    private static final String BASE_NAME = "Tab #%d";
-    public ProfileScreenSlidePagerAdapter(FragmentManager fm) {
+public class ProfileScreenSlidePagerAdapter extends FragmentPagerAdapter {
+
+    @StringRes
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private final Context mContext;
+
+    public ProfileScreenSlidePagerAdapter(Context context, FragmentManager fm) {
         super(fm);
+        mContext = context;
     }
+
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return InfoFragment.newInstance("This is fragment #1");
+                return ChampionRotationFragment.newInstance(getPageTitle(position));
             case 1:
-                return InfoFragment.newInstance("This is fragment #2");
+                return StatusFragment.newInstance(getPageTitle(position));
             default:
-                return InfoFragment.newInstance("This is fragment #3");
+                return ChampionRotationFragment.newInstance(getPageTitle(position));
         }
     }
+
     @Nullable
     @Override
-    public CharSequence getPageTitle(int position) {
-        return String.format(Locale.getDefault(), BASE_NAME, position + 1);
+    public String getPageTitle(int position) {
+        return mContext.getResources().getString(TAB_TITLES[position]);
     }
+
     @Override
     public int getCount() {
-        return NUM_PAGES;
+        // Show 2 total pages.
+        return 2;
     }
 }

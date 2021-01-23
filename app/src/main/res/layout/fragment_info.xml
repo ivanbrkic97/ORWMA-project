@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/profile_ll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="30"
@@ -23,6 +23,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
+            android:id="@+id/profile_info_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -32,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:_margin="5dp"
+                android:layout_margin="5dp"
                 android:textColor="#555555"
                 android:textSize="24sp"
                 tools:text="SummonerName" />
@@ -41,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
                 android:textColor="#555555"
                 android:textSize="24sp"
                 tools:text="Level:50" />
@@ -50,10 +50,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/flex_ll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/flexImageView"
             android:layout_width="90dp"
@@ -63,6 +65,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
+            android:id="@+id/flex_info_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -73,41 +76,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:_margin="5dp"
                 android:textSize="18sp"
                 tools:text="Flex 5v5" />
+
             <TextView
                 android:id="@+id/rankTW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:_margin="5dp"
                 android:textSize="18sp"
                 tools:text="Diamond 3" />
+
             <TextView
                 android:id="@+id/pointsTW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:_margin="5dp"
                 android:textSize="18sp"
                 tools:text="0 LP" />
+
             <TextView
                 android:id="@+id/wrTW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:_margin="5dp"
                 android:textSize="18sp"
                 tools:text="Win rate: 60%" />
-    </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/solo_ll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
@@ -120,6 +127,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
+            android:id="@+id/solo_info_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -130,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textColor="#555555"
-                android:_margin="5dp"
+                android:layout_margin="5dp"
                 android:textSize="18sp"
                 tools:text="Solo Q" />
             <TextView
@@ -139,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textColor="#555555"
-                android:_margin="5dp"
+                android:layout_margin="5dp"
                 android:textSize="18sp"
                 tools:text="Diamond 3" />
             <TextView
@@ -148,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textColor="#555555"
-                android:_margin="5dp"
+                android:layout_margin="5dp"
                 android:textSize="18sp"
                 tools:text="0 LP" />
             <TextView
@@ -157,9 +165,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textColor="#555555"
-                android:_margin="5dp"
+                android:layout_margin="5dp"
                 android:textSize="18sp"
                 tools:text="Win rate: 60%" />
          </LinearLayout>
 
+</LinearLayout>
 </LinearLayout>

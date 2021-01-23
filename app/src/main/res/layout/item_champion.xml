@@ -5,31 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:weightSum="100"
-    android:layout_height="100dp">
+    android:layout_height="80dp">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="30"
+        android:id="@+id/championIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="70"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/championNameTW"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ChampionName" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/championTitleTW"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price" />
+            android:text="ChampionTitle" />
     </LinearLayout>
 </LinearLayout>

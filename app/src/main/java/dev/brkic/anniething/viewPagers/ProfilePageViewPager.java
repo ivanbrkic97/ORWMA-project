@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import dev.brkic.anniething.R;
 
-public class ViewPager  extends AppCompatActivity {
+public class ProfilePageViewPager extends AppCompatActivity {
     private View mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class ViewPager  extends AppCompatActivity {
         initViews();
     }
     private void initViews() {
-        mViewPager = findViewById(R.id.viewPager);
+        mViewPager = findViewById(R.id.profile_view_pager);
     }
 
 }

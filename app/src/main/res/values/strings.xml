@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AnnieThing</string>
+    <string name="tab_text_1">Champion rotation</string>
+    <string name="tab_text_2">Server status</string>
 </resources>

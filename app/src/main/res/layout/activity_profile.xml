@@ -1,20 +1,20 @@
-
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="100"
-    tools:context=".MainActivity">
+    tools:context=".activities.ProfileActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.AnnieThing.NoActionBar">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
-        android:orientation="horizontal"
-        android:background="#2196F3">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageView"
@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/abc_vector_test" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/summonerNameProfileTW"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -37,11 +37,18 @@
             tools:text="SummonerName" />
     </LinearLayout>
 
-<androidx.viewpager2.widget.ViewPager2
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="90"
-    android:id="@+id/viewPager"
-    ></androidx.viewpager2.widget.ViewPager2>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/second_page_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary" />
+</com.google.android.material.appbar.AppBarLayout>
 
-</LinearLayout>
+
+<androidx.viewpager.widget.ViewPager
+android:id="@+id/profile_view_pager"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
