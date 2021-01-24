@@ -40,12 +40,13 @@ public class ChampionRotationFragment extends Fragment {
     private Call<ChampionRotationResponse> getChampionsApiCall;
     private Call<ChampionIds> getChampionIdsApiCall;
     private static final String title = "Champion rotation";
-    private static final String token = "RGAPI-9076055f-e32c-4723-ab5b-e9704f2a0773";
+    private String token;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.free_rotation, container, false);
+        token=getString(R.string.token);
         recyclerView = root.findViewById(R.id.rotation_recycler_view);
         setupRecycler();
         getChampionIds();
@@ -104,13 +105,13 @@ public class ChampionRotationFragment extends Fragment {
                 }
                 else{
                     removeArticles();
-                    Toast.makeText(getActivity(), "NotFound", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Champions not found", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:",response.toString());
                 }
             }
             @Override
             public void onFailure(Call<ChampionRotationResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.i("jejeje:",t.getMessage());
+                Log.e("Error:",t.getMessage());
             }
         });
     }
@@ -129,13 +130,14 @@ public class ChampionRotationFragment extends Fragment {
                 }
                 else{
                     removeArticles();
-                    Toast.makeText(getActivity(), "NotFound", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:","Free champion ids empty.");
+                    Toast.makeText(getActivity(), "Champions not found.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ChampionIds> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Error:",t.getMessage());
             }
         });
     }

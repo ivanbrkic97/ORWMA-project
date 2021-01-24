@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,8 +25,17 @@ import dev.brkic.anniething.adapters.FirstPagePagerAdapter;
 import dev.brkic.anniething.adapters.ProfileScreenSlidePagerAdapter;
 import dev.brkic.anniething.common.NetworkUtils;
 import dev.brkic.anniething.models.Border;
+import dev.brkic.anniething.models.Champion;
 import dev.brkic.anniething.models.ChampionIds;
 import dev.brkic.anniething.models.ChampionMastery;
+import dev.brkic.anniething.models.ChampionRotationResponse;
+import dev.brkic.anniething.models.Mastery;
+import dev.brkic.anniething.models.Match;
+import dev.brkic.anniething.models.MatchEntry;
+import dev.brkic.anniething.models.MatchHistory;
+import dev.brkic.anniething.models.MatchResponse;
+import dev.brkic.anniething.models.Participant;
+import dev.brkic.anniething.models.ParticipantIdentity;
 import dev.brkic.anniething.models.Profile;
 import dev.brkic.anniething.models.ProfileInfo;
 import dev.brkic.anniething.models.Rank;
@@ -41,18 +51,25 @@ public class ProfileActivity extends AppCompatActivity {
     private Call<List<Border>> getBordersAPICall;
     private Call<List<Rank>> getRankAPICall;
     private Call<Integer> getChampionScoreAPICall;
-    private static final String token = "RGAPI-9076055f-e32c-4723-ab5b-e9704f2a0773";
+    private Call<MatchHistory> getMatchHistoryAPICall;
+    private Call<MatchResponse> getMatchResponseAPICall;
+    private Call<ChampionRotationResponse> getChampionsApiCall;
+    private String token;
     private ProfileInfo profileInfo;
     private Integer masteryScore;
     private List<ChampionMastery> championMasteries;
     private List<Border> borders;
     private List<Rank> ranks;
+    private List<Champion> champions;
+    private List<Match> matches;
+    private List<MatchEntry> matcheEntries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getSupportActionBar().hide();
         setContentView(R.layout.activity_profile);
+        token=getString(R.string.token);
         Intent intent = getIntent();
         String summonerName = intent.getStringExtra("SummonerName");
         summonerNameTW = findViewById(R.id.summonerNameProfileTW);
@@ -71,6 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
         getBorder();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setProfileData(){
         Profile newProfile=new Profile();
         newProfile.setSummonerName(profileInfo.getName());
@@ -100,7 +118,22 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         }
-        ProfileScreenSlidePagerAdapter sectionsPagerAdapter = new ProfileScreenSlidePagerAdapter(this, getSupportFragmentManager(),newProfile);
+        List<Mastery> masteries = new ArrayList<>();
+        for(ChampionMastery championMastery:championMasteries){
+            Champion champion = champions.stream()
+                    .filter((champ) -> champ.getId() == championMastery.getChampionId())
+                    .findFirst()
+                    .orElse(new Champion());
+            Mastery mastery=new Mastery(championMastery.getChampionId(),
+                    championMastery.getChampionLevel(),
+                    championMastery.getChampionPoints(),
+                    championMastery.isChestGranted(),
+                    champion.getName(),
+                    champion.getImage());
+            masteries.add(mastery);
+        }
+
+        ProfileScreenSlidePagerAdapter sectionsPagerAdapter = new ProfileScreenSlidePagerAdapter(this, getSupportFragmentManager(),newProfile,masteries);
         ViewPager viewPager = findViewById(R.id.profile_view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.second_page_tabs);
@@ -118,15 +151,15 @@ public class ProfileActivity extends AppCompatActivity {
                     getRankedStats(profileInfo.getId());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Not found", Toast.LENGTH_SHORT).show();
-                    Log.i("Not found",response.message());
+                    Toast.makeText(getBaseContext(), "Border not found", Toast.LENGTH_SHORT).show();
+                    Log.i("Info",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Border>> call, Throwable t) {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
-                Log.i("Error:",t.getMessage());
+                Log.e("Error:",t.getMessage());
             }
         });
     }
@@ -142,15 +175,15 @@ public class ProfileActivity extends AppCompatActivity {
                     getChampionMasteries(profileInfo.getId());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Not found", Toast.LENGTH_SHORT).show();
-                    Log.i("Not found",response.message());
+                    Toast.makeText(getBaseContext(), "Ranked stats not found.", Toast.LENGTH_SHORT).show();
+                    Log.i("Info",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Rank>> call, Throwable t) {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
-                Log.i("Error:",t.getMessage());
+                Log.e("Error:",t.getMessage());
             }
         });
     }
@@ -166,15 +199,15 @@ public class ProfileActivity extends AppCompatActivity {
                     setProfileData();
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Not found", Toast.LENGTH_SHORT).show();
-                    Log.i("Not found",response.message());
+                    Toast.makeText(getBaseContext(), "Mastery score not found.", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
                 Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
-                Log.i("Error:",t.getMessage());
+                Log.e("Error:",t.getMessage());
             }
         });
     }
@@ -187,18 +220,111 @@ public class ProfileActivity extends AppCompatActivity {
                     response) {
                 if (response.isSuccessful() && response.body() != null) {
                     championMasteries = response.body();
+                    getChampions();
                     getMasteryScore(profileInfo.getId());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Not found", Toast.LENGTH_SHORT).show();
-                    Log.i("Not found",response.message());
+                    Toast.makeText(getBaseContext(), "Champion masteries not found.", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<ChampionMastery>> call, Throwable t) {
-                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
-                Log.i("Error:",t.getMessage());
+                Log.e("Error:",t.getMessage());
+            }
+        });
+    }
+
+    private void getChampions(){
+        getChampionsApiCall = NetworkUtils.getChampionApiInterface().getChampions();
+        getChampionsApiCall.enqueue(new Callback<ChampionRotationResponse>() {
+            @Override
+            public void onResponse(Call<ChampionRotationResponse> call, Response<ChampionRotationResponse>
+                    response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    champions = new ArrayList<>();
+                    for (Champion champion:response.body().getChampions().values()) {
+                        champions.add(champion);
+                    }
+                }
+                else{
+                    Log.i("Info:",response.toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<ChampionRotationResponse> call, Throwable t) {
+                Log.e("Error:",t.getMessage());
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void setMatchData(MatchResponse response, Match match){
+        MatchEntry entry = new MatchEntry();
+        ParticipantIdentity identity = response.getParticipantIdentities().stream()
+                .filter((stat) -> stat.getPlayer().getSummonerId() == profileInfo.getId())
+                .findFirst()
+                .orElse(new ParticipantIdentity());
+        Integer id = identity.getParticipantId();
+        Participant participant = response.getParticipants().stream()
+                .filter((stat) -> stat.getParticipantId() == id)
+                .findFirst()
+                .orElse(new Participant());
+        entry.setGameId(match.getGameId());
+        entry.setChampion(champions.stream()
+                .filter((champ) -> champ.getId() == championMastery.getChampionId())
+                .findFirst()
+                .orElse(new Champion()););
+        entry.setScore(String.valueOf(participant.getStats().getKills())+"/"+String.valueOf(participant.getStats().getDeaths())+"/"+String.valueOf(participant.getStats().getAssists()));
+        entry.setWin(participant.getStats().isWin());
+    }
+
+    private void getMatch(Match match) {
+        getMatchResponseAPICall = NetworkUtils.getLOLApiInterface().getMatch(token,match.getGameId());
+        getMatchResponseAPICall.enqueue(new Callback<MatchResponse>() {
+            @Override
+            public void onResponse(Call<MatchResponse> call, Response<MatchResponse>
+                    response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    setMatchData(response.body(),match);
+                }
+                else{
+                    Toast.makeText(getBaseContext(), "Profile information not found.", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:",response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MatchResponse> call, Throwable t) {
+                Log.e("Error:",t.getMessage());
+            }
+        });
+    }
+    public void getMatchHistoryData(MatchHistory history){
+        matches=history.getMatches().subList(0,9);
+        for(Match match : matches){
+            getMatch(match);
+        }
+    }
+    private void getMatchHistory(String accountId) {
+        getMatchHistoryAPICall = NetworkUtils.getLOLApiInterface().getMatchHistory(token,accountId);
+        getMatchHistoryAPICall.enqueue(new Callback<MatchHistory>() {
+            @Override
+            public void onResponse(Call<MatchHistory> call, Response<MatchHistory>
+                    response) {
+                if (response.isSuccessful() && response.body() != null) {
+                   getMatchHistoryData(response.body());
+                }
+                else{
+                    Toast.makeText(getBaseContext(), "Profile information not found.", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:",response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MatchHistory> call, Throwable t) {
+                Log.e("Error:",t.getMessage());
             }
         });
     }
@@ -213,21 +339,18 @@ public class ProfileActivity extends AppCompatActivity {
                     try {
                         setProfile(response.body());
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        Log.e("Error",e.getMessage());
                     }
-                    Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT).show();
-                    Log.i("jejeje:",response.body().getName());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT).show();
-                    Log.i("jejeje:",response.message());
+                    Toast.makeText(getBaseContext(), "Profile information not found.", Toast.LENGTH_SHORT).show();
+                    Log.i("Info:",response.toString());
                 }
             }
 
             @Override
             public void onFailure(Call<ProfileInfo> call, Throwable t) {
-                Toast.makeText(getBaseContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.i("jejeje:",t.getMessage());
+                Log.e("Error:",t.getMessage());
             }
         });
     }

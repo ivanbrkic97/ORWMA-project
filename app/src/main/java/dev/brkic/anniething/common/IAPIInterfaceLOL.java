@@ -5,6 +5,8 @@ import java.util.List;
 import dev.brkic.anniething.models.Champion;
 import dev.brkic.anniething.models.ChampionIds;
 import dev.brkic.anniething.models.ChampionMastery;
+import dev.brkic.anniething.models.MatchHistory;
+import dev.brkic.anniething.models.MatchResponse;
 import dev.brkic.anniething.models.ProfileInfo;
 import dev.brkic.anniething.models.Rank;
 import dev.brkic.anniething.models.StatusResponse;
@@ -31,4 +33,10 @@ public interface IAPIInterfaceLOL {
 
     @GET("league/v4/entries/by-summoner/{encryptedSummonerId}")
     Call<List<Rank>> getRankedStats(@Header("X-Riot-Token") String token, @Path("encryptedSummonerId") String encryptedSummonerId);
+
+    @GET("match/v4/matchlists/by-account/{encryptedAccountId}")
+    Call<MatchHistory> getMatchHistory(@Header("X-Riot-Token") String token, @Path("encryptedAccountId") String encryptedAccountId);
+
+    @GET("match/v4/matches/{matchId}")
+    Call<MatchResponse> getMatch(@Header("X-Riot-Token") String token, @Path("matchId") String matchId);
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_weight="100">
+
+    <ImageView
+        android:id="@+id/champion_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/champion_name_tw"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ChampionName" />
+
+        <TextView
+            android:id="@+id/master_level_tw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="ChampionTitle" />
+        <TextView
+            android:id="@+id/mastery_score_tw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="ChampionTitle" />
+        <TextView
+            android:id="@+id/is_dropped_tw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="ChampionTitle" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/chest_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        tools:srcCompat="@tools:sample/avatars" />
+</LinearLayout>

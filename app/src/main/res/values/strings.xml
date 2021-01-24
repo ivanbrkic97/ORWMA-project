@@ -5,4 +5,5 @@
     <string name="profile_tab_text_1">Profile</string>
     <string name="profile_tab_text_2">Match history</string>
     <string name="profile_tab_text_3">Mastery</string>
+    <string name="token">RGAPI-1333f523-e347-4368-8f6a-67284ffe8c6f</string>
 </resources>

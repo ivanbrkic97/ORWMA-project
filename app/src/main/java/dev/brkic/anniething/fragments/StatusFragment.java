@@ -36,13 +36,14 @@ public class StatusFragment extends Fragment {
     private RecyclerView recyclerView;
     private StatusItemAdapter adapter;
     private Call<StatusResponse> getStatusesApiCall;
-    private static final String title = "Server Status";
-    private static final String token = "RGAPI-9076055f-e32c-4723-ab5b-e9704f2a0773";
+    private final static String title = "Server Status";
+    private String token;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.server_status, container, false);
+        token = getString(R.string.token);
         recyclerView = root.findViewById(R.id.status_recycler_view);
         setupRecycler();
         getStatuses();
@@ -104,13 +105,12 @@ public class StatusFragment extends Fragment {
                 }
                 else{
                     removeArticles();
-                    Toast.makeText(getActivity(), "NotFound", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "No recent issues or events to report", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<StatusResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.i("jejeje:",t.getMessage());
+                Log.e("Error:",t.getMessage());
             }
         });
     }

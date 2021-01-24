@@ -28,6 +28,8 @@ public class InfoFragment  extends Fragment {
     private TextView flexWR;
     private TextView summonerName;
     private TextView level;
+    private TextView masteryScore;
+    private TextView chest;
     private TextView soloQRank;
     private TextView soloQType;
     private TextView soloQPoints;
@@ -76,7 +78,8 @@ public class InfoFragment  extends Fragment {
         soloQType = view.findViewById(R.id.type1TW);
         soloQPoints = view.findViewById(R.id.points1TW);
         soloQWR = view.findViewById(R.id.wr1TW);
-
+        masteryScore = view.findViewById(R.id.masteryScoreTW);
+        chest=view.findViewById(R.id.chestDroppedTW);
         profileIcon = view.findViewById(R.id.profileImageView);
         profileBorder = view.findViewById(R.id.profile_border_image_view);
         flexIcon = view.findViewById(R.id.flexImageView);
@@ -92,8 +95,10 @@ public class InfoFragment  extends Fragment {
 
     public void setData() {
         summonerName.setText(profile.getSummonerName());
-        level.setText("Level: "+String.valueOf(profile.getSummonerLevel()));
-        Picasso.with(profileBorder.getContext()).load(profile.getBorder().getImage()).into(profileBorder);
+        level.setText(String.valueOf(profile.getSummonerLevel()));
+        masteryScore.setText("Mastery score:"+String.valueOf(profile.getMasteryScore()));
+        chest.setText("Chests Acquired:"+String.valueOf(profile.getChestDropped()));
+        Picasso.with(profileBorder.getContext()).load(profile.getBorder().getImage().replace("http","https")).into(profileBorder);
         Picasso.with(profileIcon.getContext()).load(getImage("icon"+String.valueOf(profile.getSummonerIcon()))).into(profileIcon);
         if(profile.getFlex() != null){
             flexType.setText("Flex 5v5");
