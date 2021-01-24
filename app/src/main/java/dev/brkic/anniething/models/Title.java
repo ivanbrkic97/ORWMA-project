@@ -2,8 +2,8 @@ package dev.brkic.anniething.models;
 
 public class Title {
 
-    public String locale;
-    public String content;
+    private String locale;
+    private String content;
 
     public String getLocale() {
         return locale;

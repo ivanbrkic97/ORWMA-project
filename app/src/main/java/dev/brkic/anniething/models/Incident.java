@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Incident {
-    public Integer id;
-    public List<Title> titles;
-    public String incident_severity;
-    public List<String> platforms;
+    private Integer id;
+    private List<Title> titles;
+    private String incident_severity;
+    private List<String> platforms;
 
     public Integer getId() {
         return id;

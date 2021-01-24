@@ -80,16 +80,16 @@ public class StatusFragment extends Fragment {
 
     private void showArticles(StatusResponse response) {
         List<Status> statuses = new ArrayList<>();
-        if(!response.getIncidents().isEmpty()){
+        if(response.getIncidents() != null && !response.getIncidents().isEmpty()){
         for(Incident incident:response.getIncidents()){
-            Status status = new Status(response.getName(),incident.titles.get(0).getContent(),incident.platforms.toString());
+            Status status = new Status(response.getName(),incident.getTitles().get(0).getContent(),incident.getPlatforms().toString());
             statuses.add(status);
         }}
         if(!response.getMaintenances().isEmpty()){
-            for(Incident incident:response.getIncidents()){
-                Status status = new Status(response.getName(),incident.titles.get(0).getContent(),incident.platforms.toString());
-                statuses.add(status);
-            }}
+            for(Incident incident:response.getMaintenances()){
+                Status status = new Status(response.getName(),incident.getTitles().get(0).getContent(),incident.getPlatforms().toString());
+                statuses.add(status);}
+            }
         setupRecyclerData(statuses);
     }
 

@@ -1,5 +1,6 @@
 package dev.brkic.anniething.fragments;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
+
+import java.net.URI;
+
 import dev.brkic.anniething.R;
+import dev.brkic.anniething.models.Profile;
+import dev.brkic.anniething.models.ProfileInfo;
 
 public class InfoFragment  extends Fragment {
     private TextView flexRank;
@@ -25,29 +33,39 @@ public class InfoFragment  extends Fragment {
     private TextView soloQPoints;
     private TextView soloQWR;
     private ImageView profileIcon;
+    private ImageView profileBorder;
     private ImageView flexIcon;
     private ImageView soloQIcon;
+    private Profile profile;
 
-    private static final String BUNDLE_MESSAGE = "message";
+    private static final String BUNDLE_MESSAGE = "summonerName";
 
 
-    public static InfoFragment newInstance(String message) {
+    public static InfoFragment newInstance() {
         InfoFragment fragment = new InfoFragment();
         Bundle args = new Bundle();
-        args.putString(BUNDLE_MESSAGE, message);
         fragment.setArguments(args);
         return fragment;
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public  void setProfile(Profile profile){
+        this.profile=profile;
+    }
+    @Override    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        View root = inflater.inflate(R.layout.fragment_info, container, false);
+        findViews(root);
+        setData();
+        return root;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        findViews(view);
+
+    }
+
+    public void findViews(@NonNull View view){
         flexRank = view.findViewById(R.id.rankTW);
         flexType = view.findViewById(R.id.typeTW);
         flexPoints = view.findViewById(R.id.pointsTW);
@@ -60,12 +78,36 @@ public class InfoFragment  extends Fragment {
         soloQWR = view.findViewById(R.id.wr1TW);
 
         profileIcon = view.findViewById(R.id.profileImageView);
+        profileBorder = view.findViewById(R.id.profile_border_image_view);
         flexIcon = view.findViewById(R.id.flexImageView);
         soloQIcon = view.findViewById(R.id.soloqIcon);
-
-
     }
-    public void displayMessage(String message) {
-        //mMessageTextView.setText(!message.trim().isEmpty() ? message : "...");
+
+    public int getImage(String imageName) {
+
+        int drawableResourceId = profileBorder.getContext().getResources().getIdentifier(imageName.replace(".png",""), "drawable", "dev.brkic.anniething");
+
+        return drawableResourceId;
+    }
+
+    public void setData() {
+        summonerName.setText(profile.getSummonerName());
+        level.setText("Level: "+String.valueOf(profile.getSummonerLevel()));
+        Picasso.with(profileBorder.getContext()).load(profile.getBorder().getImage()).into(profileBorder);
+        Picasso.with(profileIcon.getContext()).load(getImage("icon"+String.valueOf(profile.getSummonerIcon()))).into(profileIcon);
+        if(profile.getFlex() != null){
+            flexType.setText("Flex 5v5");
+            Picasso.with(flexIcon.getContext()).load(getImage(profile.getFlex().getTier().toLowerCase()+profile.getFlex().getRank().toLowerCase())).into(flexIcon);
+            flexRank.setText(profile.getFlex().getTier()+" "+profile.getFlex().getRank());
+            flexPoints.setText(String.valueOf(profile.getFlex().getLeaguePoints())+" LP");
+            flexWR.setText(String.valueOf(profile.getFlex().getWins())+"/"+String.valueOf(profile.getFlex().getLosses()));
+        }
+        if(profile.getSolo() != null){
+            soloQType.setText("Solo/Duo");
+            Picasso.with(soloQIcon.getContext()).load(getImage(profile.getSolo().getTier().toLowerCase()+profile.getSolo().getRank().toLowerCase())).into(soloQIcon);
+            soloQRank.setText(profile.getSolo().getTier()+" "+profile.getSolo().getRank());
+            soloQPoints.setText(String.valueOf(profile.getSolo().getLeaguePoints())+" LP");
+            soloQWR.setText(String.valueOf(profile.getSolo().getWins())+"/"+String.valueOf(profile.getSolo().getLosses()));
+        }
     }
 }

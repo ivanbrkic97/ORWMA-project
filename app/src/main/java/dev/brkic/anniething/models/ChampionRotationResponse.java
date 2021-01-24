@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ChampionRotationResponse {
-    String type;
-    String format;
-    String version;
+    private String type;
+    private String format;
+    private String version;
     @SerializedName("data")
-    Map<String,Champion> champions;
+    private Map<String,Champion> champions;
 
     public String getType() {
         return type;

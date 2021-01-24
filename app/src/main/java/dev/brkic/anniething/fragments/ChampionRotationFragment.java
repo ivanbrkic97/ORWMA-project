@@ -41,7 +41,7 @@ public class ChampionRotationFragment extends Fragment {
     private Call<ChampionIds> getChampionIdsApiCall;
     private static final String title = "Champion rotation";
     private static final String token = "RGAPI-9076055f-e32c-4723-ab5b-e9704f2a0773";
-    private TextView mMessageTextView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -114,6 +114,7 @@ public class ChampionRotationFragment extends Fragment {
             }
         });
     }
+
     private void removeArticles() {
         adapter.removeData();
     }

@@ -1,9 +1,9 @@
 package dev.brkic.anniething.models;
 
 public class Status {
-    String name;
-    String info;
-    String platforms;
+    private String name;
+    private String info;
+    private String platforms;
 
     public Status(String name, String info, String platforms) {
         this.name = name;

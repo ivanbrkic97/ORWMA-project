@@ -43,6 +43,8 @@
             android:id="@+id/first_page_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabSelectedTextColor="#CCCCCC"
+            app:tabTextColor="#FFFFFF"
             android:background="?attr/colorPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 

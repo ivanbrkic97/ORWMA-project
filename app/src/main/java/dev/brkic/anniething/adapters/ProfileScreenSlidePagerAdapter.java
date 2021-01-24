@@ -15,27 +15,34 @@ import dev.brkic.anniething.R;
 import dev.brkic.anniething.fragments.ChampionRotationFragment;
 import dev.brkic.anniething.fragments.InfoFragment;
 import dev.brkic.anniething.fragments.StatusFragment;
+import dev.brkic.anniething.models.Profile;
+import dev.brkic.anniething.models.ProfileInfo;
 
 public class ProfileScreenSlidePagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.profile_tab_text_1, R.string.profile_tab_text_1,R.string.profile_tab_text_3};
     private final Context mContext;
+    private Profile profileInfo;
 
-    public ProfileScreenSlidePagerAdapter(Context context, FragmentManager fm) {
+    public ProfileScreenSlidePagerAdapter(Context context, FragmentManager fm, Profile profileInfo) {
         super(fm);
         mContext = context;
+        this.profileInfo=profileInfo;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return ChampionRotationFragment.newInstance(getPageTitle(position));
-            case 1:
-                return StatusFragment.newInstance(getPageTitle(position));
-            default:
-                return ChampionRotationFragment.newInstance(getPageTitle(position));
+            case 0:InfoFragment infoFragment = InfoFragment.newInstance();
+                infoFragment.setProfile(profileInfo);
+                return infoFragment;
+            case 1:InfoFragment infoFragment1 = InfoFragment.newInstance();
+                infoFragment1.setProfile(profileInfo);
+                return infoFragment1;
+            default:InfoFragment infoFragment2 = InfoFragment.newInstance();
+                infoFragment2.setProfile(profileInfo);
+                return infoFragment2;
         }
     }
 

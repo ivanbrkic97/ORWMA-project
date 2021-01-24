@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AnnieThing.NoActionBar"
     tools:context=".activities.ProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -40,6 +41,8 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/second_page_tabs"
         android:layout_width="match_parent"
+        app:tabSelectedTextColor="#CCCCCC"
+        app:tabTextColor="#FFFFFF"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary" />
 </com.google.android.material.appbar.AppBarLayout>

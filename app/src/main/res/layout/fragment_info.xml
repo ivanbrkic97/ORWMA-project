@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
     <LinearLayout
-        android:id="@+id/profile_ll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_height="160dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/profileImageView"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_margin="10dp"
-            tools:srcCompat="@tools:sample/avatars" />
+
+            <RelativeLayout
+                android:layout_width="160dp"
+                android:layout_height="160dp">
+
+                <ImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="30dp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    tools:srcCompat="@drawable/draven" />
+
+                <ImageView
+                    android:id="@+id/profile_border_image_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@drawable/theme7" />
+
+            </RelativeLayout>
+
+
 
         <LinearLayout
-            android:id="@+id/profile_info_ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -35,8 +50,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:textColor="#555555"
+                android:textStyle="bold"
                 android:textSize="24sp"
                 tools:text="SummonerName" />
+
             <TextView
                 android:id="@+id/levelTW"
                 android:layout_width="wrap_content"
@@ -50,10 +67,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/flex_ll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
+        android:layout_height="140dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -79,6 +94,7 @@
                 android:layout_margin="5dp"
                 android:textColor="#555555"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 tools:text="Flex 5v5" />
 
             <TextView
@@ -88,7 +104,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:text="Diamond 3" />
 
             <TextView
@@ -98,7 +114,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:text="0 LP" />
 
             <TextView
@@ -108,17 +124,16 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:textColor="#555555"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 tools:text="Win rate: 60%" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/solo_ll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
+        android:layout_height="140dp"
         android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/soloqIcon"
             android:layout_width="90dp"
@@ -137,38 +152,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="#555555"
                 android:layout_margin="5dp"
+                android:textColor="#555555"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 tools:text="Solo Q" />
+
             <TextView
                 android:id="@+id/rank1TW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="#555555"
                 android:layout_margin="5dp"
-                android:textSize="18sp"
+                android:textColor="#555555"
+                android:textSize="14sp"
                 tools:text="Diamond 3" />
+
             <TextView
                 android:id="@+id/points1TW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="#555555"
                 android:layout_margin="5dp"
-                android:textSize="18sp"
+                android:textColor="#555555"
+                android:textSize="14sp"
                 tools:text="0 LP" />
+
             <TextView
                 android:id="@+id/wr1TW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="#555555"
                 android:layout_margin="5dp"
-                android:textSize="18sp"
+                android:textColor="#555555"
+                android:textSize="14sp"
                 tools:text="Win rate: 60%" />
-         </LinearLayout>
+        </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>

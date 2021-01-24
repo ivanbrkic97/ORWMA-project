@@ -9,8 +9,11 @@ public class NetworkUtils {
             "https://eun1.api.riotgames.com/lol/";
     private static final String BASE_APICHAMPIONS =
             "https://ddragon.leagueoflegends.com/cdn/9.3.1/data/en_US/";
+    private static final String BASE_APIBORDER =
+            "https://cdn.demacian.com/misc/";
     private static IAPIInterfaceChampions apiInterfaceCHAMPIONS;
     private static IAPIInterfaceLOL apiInterfaceLOL;
+    private static IAPIInterfaceBorder apiInterfaceBorder;
     public static IAPIInterfaceLOL getLOLApiInterface() {
         if (apiInterfaceLOL == null) {
             Retrofit retrofit = new Retrofit.Builder()
@@ -20,6 +23,17 @@ public class NetworkUtils {
             apiInterfaceLOL = retrofit.create(IAPIInterfaceLOL.class);
         }
         return apiInterfaceLOL;
+    }
+
+    public static IAPIInterfaceBorder getBorderApiInterface() {
+        if (apiInterfaceBorder == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_APIBORDER)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            apiInterfaceBorder = retrofit.create(IAPIInterfaceBorder.class);
+        }
+        return apiInterfaceBorder;
     }
 
     public static IAPIInterfaceChampions getChampionApiInterface() {
