@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,12 +68,14 @@ public class ProfileActivity extends AppCompatActivity {
     private List<Match> matches;
     private List<MatchEntry> matcheEntries;
     private List<Queue> queues;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getSupportActionBar().hide();
         setContentView(R.layout.activity_profile);
+        progressBar.setVisibility(View.VISIBLE);
         token=getString(R.string.token);
         Intent intent = getIntent();
         String summonerName = intent.getStringExtra("SummonerName");
@@ -109,10 +112,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if(ranks != null && !ranks.isEmpty()){
             for(Rank rank : ranks){
-                if(rank.getQueueType().contentEquals("RANKED_SOLO_5x5")){
+                if(rank.getQueueType().contentEquals(getText(R.string.solo))){
                     newProfile.setSolo(rank);
                 }
-                if(rank.getQueueType().contentEquals("RANKED_FLEX_SR")){
+                if(rank.getQueueType().contentEquals(getText(R.string.flex))){
                     newProfile.setFlex(rank);
                 }
             }
@@ -138,6 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.second_page_tabs);
         tabs.setupWithViewPager(viewPager);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void getBorder() {
@@ -151,14 +155,12 @@ public class ProfileActivity extends AppCompatActivity {
                     getRankedStats(profileInfo.getId());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Border not found", Toast.LENGTH_SHORT).show();
                     Log.i("Info",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Border>> call, Throwable t) {
-                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
                 Log.e("Error:",t.getMessage());
             }
         });
@@ -174,14 +176,12 @@ public class ProfileActivity extends AppCompatActivity {
                     ranks= response.body();
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Ranked stats not found.", Toast.LENGTH_SHORT).show();
                     Log.i("Info",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Rank>> call, Throwable t) {
-                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
                 Log.e("Error:",t.getMessage());
             }
         });
@@ -198,14 +198,12 @@ public class ProfileActivity extends AppCompatActivity {
                     masteryScore= response.body();
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Mastery score not found.", Toast.LENGTH_SHORT).show();
                     Log.i("Info:",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
                 Log.e("Error:",t.getMessage());
             }
         });
@@ -222,7 +220,6 @@ public class ProfileActivity extends AppCompatActivity {
                     getMasteryScore(profileInfo.getId());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Champion masteries not found.", Toast.LENGTH_SHORT).show();
                     Log.i("Info:",response.message());
                 }
             }
@@ -314,7 +311,6 @@ public class ProfileActivity extends AppCompatActivity {
                         getMatch(matches,i+1,max);}
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Profile information not found.", Toast.LENGTH_SHORT).show();
                     Log.i("Info:",response.toString());
                 }
             }
@@ -343,7 +339,6 @@ public class ProfileActivity extends AppCompatActivity {
                      getMatchHistoryData(response.body());
                 }
                 else{
-                    Toast.makeText(getBaseContext(), "Profile information not found.", Toast.LENGTH_SHORT).show();
                     Log.i("Info:",response.toString());
                 }
             }

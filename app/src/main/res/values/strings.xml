@@ -1,9 +1,24 @@
 <resources>
+    <string name="token">RGAPI-ce081f40-6c5c-4abd-ae14-ec652291ec42</string>
     <string name="app_name">AnnieThing</string>
     <string name="tab_text_1">Champion rotation</string>
     <string name="tab_text_2">Server status</string>
     <string name="profile_tab_text_1">Profile</string>
     <string name="profile_tab_text_2">Match history</string>
     <string name="profile_tab_text_3">Mastery</string>
-    <string name="token">RGAPI-1333f523-e347-4368-8f6a-67284ffe8c6f</string>
+    <string name="double_kill">Double kill</string>
+    <string name="triple_kill">Triple kill</string>
+    <string name="quadra_kill">Quadra kill</string>
+    <string name="penta_kill">Penta kill</string>
+    <string name="server_string">Server: </string>
+    <string name="platforms_string">Platforms: </string>
+    <string name="level_string">Level </string>
+    <string name="kda_string">:1 KDA</string>
+    <string name="cs_string"> CS</string>
+    <string name="points_string">pts</string>
+    <string name="package_string">dev.brkic.anniething</string>
+    <string name="maintenance_empty">No recent issues or events to report</string>
+    <string name="solo">RANKED_SOLO_5x5</string>
+    <string name="flex">RANKED_FLEX_SR</string>
+    <string name="search_button">Search</string>
 </resources>

@@ -36,7 +36,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="20"
                 android:onClick="searchButtonOnClick"
-                android:text="Button" />"
+                android:text="@string/search_button" />"
         </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout

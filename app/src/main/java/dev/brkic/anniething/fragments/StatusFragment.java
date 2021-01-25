@@ -86,11 +86,15 @@ public class StatusFragment extends Fragment {
             Status status = new Status(response.getName(),incident.getTitles().get(0).getContent(),incident.getPlatforms().toString());
             statuses.add(status);
         }}
-        if(!response.getMaintenances().isEmpty()){
+        if(response.getMaintenances() != null && !response.getMaintenances().isEmpty()){
             for(Incident incident:response.getMaintenances()){
                 Status status = new Status(response.getName(),incident.getTitles().get(0).getContent(),incident.getPlatforms().toString());
                 statuses.add(status);}
             }
+        if(response.getMaintenances() == null && response.getIncidents() == null){
+            Status status = new Status("EUNE",response.getName(),"All");
+            statuses.add(status);
+        }
         setupRecyclerData(statuses);
     }
 
@@ -105,7 +109,9 @@ public class StatusFragment extends Fragment {
                 }
                 else{
                     removeArticles();
-                    Toast.makeText(getActivity(), "No recent issues or events to report", Toast.LENGTH_SHORT).show();
+                    StatusResponse statusResponse = new StatusResponse();
+                    statusResponse.setName(getContext().getText(R.string.maintenance_empty).toString());
+                    showArticles(statusResponse);
                 }
             }
             @Override

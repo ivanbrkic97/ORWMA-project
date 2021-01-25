@@ -14,10 +14,6 @@ import dev.brkic.anniething.fragments.InfoFragment;
 import dev.brkic.anniething.fragments.StatusFragment;
 import dev.brkic.anniething.models.Champion;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class FirstPagePagerAdapter extends FragmentPagerAdapter {
 
     @StringRes

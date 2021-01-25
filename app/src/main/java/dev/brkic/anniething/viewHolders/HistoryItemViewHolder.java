@@ -52,17 +52,17 @@ public class HistoryItemViewHolder extends RecyclerView.ViewHolder {
             queueType.setText(article.getQueue());
         championName.setText(article.getChampion().getName());
         scoreTextView.setText(article.getScore());
-        csTW.setText(String.valueOf(article.getTotalMinionsKilled())+" CS");
+        csTW.setText(String.valueOf(article.getTotalMinionsKilled())+csTW.getContext().getText(R.string.cs_string));
         level.setText(article.getLevel());
-        kda.setText(String.valueOf(article.getKda()).subSequence(0,2)+":1 KDA");
+        kda.setText(String.valueOf(article.getKda()).subSequence(0,2)+kda.getContext().getText(R.string.kda_string).toString());
         if(article.getLargestMultiKill() == 2){
-            multikill.setText("Double Kill");
+            multikill.setText(multikill.getContext().getText(R.string.double_kill));
         } else if(article.getLargestMultiKill() == 3) {
-            multikill.setText("Triple Kill");
+            multikill.setText(multikill.getContext().getText(R.string.triple_kill));
         } else if(article.getLargestMultiKill() == 4) {
-            multikill.setText("Quadra Kill");
+            multikill.setText(multikill.getContext().getText(R.string.quadra_kill));
         } else if(article.getLargestMultiKill() == 5) {
-            multikill.setText("Penta Kill");
+            multikill.setText(multikill.getContext().getText(R.string.penta_kill));
         }
         else {
             multikill.setText("");

@@ -70,8 +70,7 @@
                 android:layout_margin="5dp"
                 android:textColor="#555555"
                 android:textStyle="bold"
-                android:textSize="28sp"
-                tools:text="SummonerName" />
+                android:textSize="28sp" />
 
             <TextView
                 android:id="@+id/masteryScoreTW"
@@ -81,8 +80,7 @@
                 android:layout_margin="5dp"
                 android:textColor="#555555"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                tools:text="MasteryScore:" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/chestDroppedTW"
@@ -92,8 +90,7 @@
                 android:layout_margin="5dp"
                 android:textColor="#555555"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                tools:text="Chest dropped:15" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -126,8 +123,7 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Solo Q" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/rank1TW"
@@ -137,8 +133,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
-                android:textSize="14sp"
-                tools:text="Diamond 3" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/points1TW"
@@ -148,8 +143,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
-                android:textSize="14sp"
-                tools:text="0 LP" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/wr1TW"
@@ -159,8 +153,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
-                android:textSize="14sp"
-                tools:text="Win rate: 60%" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -194,8 +187,7 @@
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="Flex 5v5" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/rankTW"
@@ -205,8 +197,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
-                android:textSize="14sp"
-                tools:text="Diamond 3" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/pointsTW"
@@ -216,8 +207,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
-                android:textSize="14sp"
-                tools:text="0 LP" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/wrTW"
@@ -227,8 +217,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#555555"
-                android:textSize="14sp"
-                tools:text="Win rate: 60%" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

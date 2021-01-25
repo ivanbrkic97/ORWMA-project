@@ -25,8 +25,8 @@ public class StatusItemViewHolder extends RecyclerView.ViewHolder {
 
     public void  setArticle(Status status)
     {
-        nameTextView.setText("Server:"+status.getName());
+        nameTextView.setText(nameTextView.getContext().getText(R.string.server_string)+status.getName());
         infoTextView.setText(status.getInfo());
-        platformTextView.setText("Platforms:"+status.getPlatforms());
+        platformTextView.setText(platformTextView.getContext().getText(R.string.platforms_string)+status.getPlatforms());
     }
 }

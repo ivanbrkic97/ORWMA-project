@@ -130,7 +130,7 @@ public class ChampionRotationFragment extends Fragment {
                 }
                 else{
                     removeArticles();
-                    Log.i("Info:","Free champion ids empty.");
+                    Log.i("Info:",response.toString());
                     Toast.makeText(getActivity(), "Champions not found.", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -27,7 +27,7 @@ public class ChampionItemViewHolder extends RecyclerView.ViewHolder {
 
     public int getImage(String imageName) {
 
-        int drawableResourceId = imageView.getContext().getResources().getIdentifier(imageName.replace(".png",""), "drawable", "dev.brkic.anniething");
+        int drawableResourceId = imageView.getContext().getResources().getIdentifier(imageName.replace(".png",""), "drawable", imageView.getContext().getText(R.string.package_string).toString());
 
         return drawableResourceId;
     }

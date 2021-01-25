@@ -34,7 +34,7 @@ public class MasteryItemViewHolder extends RecyclerView.ViewHolder {
 
     public int getImage(String imageName) {
 
-        int drawableResourceId = imageView.getContext().getResources().getIdentifier(imageName.replace(".png",""), "drawable", "dev.brkic.anniething");
+        int drawableResourceId = imageView.getContext().getResources().getIdentifier(imageName.replace(".png",""), "drawable", scoreTextView.getContext().getText(R.string.package_string).toString());
 
         return drawableResourceId;
     }
@@ -43,8 +43,8 @@ public class MasteryItemViewHolder extends RecyclerView.ViewHolder {
     {
         if(article.getName() != null){
         nameTextView.setText(article.getName());
-        levelTextView.setText("Level "+String.valueOf(article.getChampionLevel()));
-        scoreTextView.setText(String.valueOf(article.getChampionPoints())+" pts");
+        levelTextView.setText(levelTextView.getContext().getText(R.string.level_string)+String.valueOf(article.getChampionLevel()));
+        scoreTextView.setText(String.valueOf(article.getChampionPoints())+scoreTextView.getContext().getText(R.string.points_string));
         Picasso.with(imageView.getContext()).load(getImage(article.getImage().getName().toLowerCase())).into(imageView);
         if(!article.isChestGranted()){
             Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);

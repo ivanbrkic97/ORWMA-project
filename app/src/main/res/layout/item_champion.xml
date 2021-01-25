@@ -21,13 +21,11 @@
         <TextView
             android:id="@+id/championNameTW"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ChampionName" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/championTitleTW"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ChampionTitle" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

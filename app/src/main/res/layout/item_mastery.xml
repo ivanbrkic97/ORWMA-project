@@ -24,27 +24,23 @@
             android:layout_marginLeft="3dp"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ChampionName" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/master_level_tw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="ChampionTitle" />
+            android:layout_marginLeft="5dp" />
         <TextView
             android:id="@+id/mastery_score_tw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="ChampionTitle" />
+            android:layout_marginLeft="5dp" />
         <TextView
             android:id="@+id/is_dropped_tw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="ChampionTitle" />
+            android:layout_marginLeft="5dp" />
     </LinearLayout>
     <ImageView
         android:id="@+id/chest_icon"
