@@ -1,5 +1,7 @@
 package dev.brkic.anniething.models;
 
+import java.util.List;
+
 public class Team {
     private int teamId;
     private String win;

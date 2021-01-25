@@ -1,13 +1,49 @@
 package dev.brkic.anniething.models;
 
 public class MatchEntry {
-    public String platformId;
-    public String gameId;
-    public int queue;
-    public int season;
+    private String platformId;
+    private String gameId;
+    private String queue;
+    private int season;
     private Champion champion;
     private String score;
     private boolean win;
+    private int largestMultiKill;
+    private double kda;
+    private String level;
+    private int totalMinionsKilled;
+
+    public int getTotalMinionsKilled() {
+        return totalMinionsKilled;
+    }
+
+    public void setTotalMinionsKilled(int totalMinionsKilled) {
+        this.totalMinionsKilled = totalMinionsKilled;
+    }
+
+    public void setLargestMultiKill(int largestMultiKill) {
+        this.largestMultiKill = largestMultiKill;
+    }
+
+    public void setKda(double kda) {
+        this.kda = kda;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getLargestMultiKill() {
+        return largestMultiKill;
+    }
+
+    public double getKda() {
+        return kda;
+    }
+
+    public String getLevel() {
+        return level;
+    }
 
     public String getScore() {
         return score;
@@ -41,11 +77,11 @@ public class MatchEntry {
         this.gameId = gameId;
     }
 
-    public int getQueue() {
+    public String getQueue() {
         return queue;
     }
 
-    public void setQueue(int queue) {
+    public void setQueue(String queue) {
         this.queue = queue;
     }
 

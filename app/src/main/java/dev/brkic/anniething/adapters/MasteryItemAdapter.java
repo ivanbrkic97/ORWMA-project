@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import dev.brkic.anniething.R;
@@ -42,6 +44,11 @@ public class MasteryItemAdapter extends RecyclerView.Adapter<MasteryItemViewHold
 
         public void addData(List<Mastery> data) {
                 this.dataList.clear();
+                Collections.sort(data, new Comparator<Mastery>() {
+                        public int compare(Mastery o1, Mastery o2) {
+                                return (o2.getChampionLevel()-o1.getChampionLevel()) == 0 ? o2.getChampionLevel()-o1.getChampionLevel() : o2.getChampionPoints()-o1.getChampionPoints();
+                        }
+                });
                 this.dataList.addAll(data);
                 notifyDataSetChanged();
         }

@@ -1,5 +1,7 @@
 package dev.brkic.anniething.viewHolders;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,9 +46,14 @@ public class MasteryItemViewHolder extends RecyclerView.ViewHolder {
         levelTextView.setText("Level "+String.valueOf(article.getChampionLevel()));
         scoreTextView.setText(String.valueOf(article.getChampionPoints())+" pts");
         Picasso.with(imageView.getContext()).load(getImage(article.getImage().getName().toLowerCase())).into(imageView);
-        Picasso.with(chest.getContext()).load(R.drawable.chest).into(chest);
         if(!article.isChestGranted()){
-            chest.setVisibility(View.INVISIBLE);
-        }}
+            Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);
+            chest.setColorFilter(Color.GRAY);
+        }
+        else{
+            Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);
+            chest.clearColorFilter();
+        }
+        }
     }
 }

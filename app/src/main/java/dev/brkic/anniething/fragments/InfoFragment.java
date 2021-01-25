@@ -39,6 +39,8 @@ public class InfoFragment  extends Fragment {
     private ImageView flexIcon;
     private ImageView soloQIcon;
     private Profile profile;
+    private View soloQInfo;
+    private View flexInfo;
 
     private static final String BUNDLE_MESSAGE = "summonerName";
 
@@ -84,6 +86,8 @@ public class InfoFragment  extends Fragment {
         profileBorder = view.findViewById(R.id.profile_border_image_view);
         flexIcon = view.findViewById(R.id.flexImageView);
         soloQIcon = view.findViewById(R.id.soloqIcon);
+        soloQInfo = view.findViewById(R.id.solo_info_ll);
+        flexInfo = view.findViewById(R.id.flex_info_ll);
     }
 
     public int getImage(String imageName) {
@@ -100,19 +104,27 @@ public class InfoFragment  extends Fragment {
         chest.setText("Chests Acquired:"+String.valueOf(profile.getChestDropped()));
         Picasso.with(profileBorder.getContext()).load(profile.getBorder().getImage().replace("http","https")).into(profileBorder);
         Picasso.with(profileIcon.getContext()).load(getImage("icon"+String.valueOf(profile.getSummonerIcon()))).into(profileIcon);
-        if(profile.getFlex() != null){
-            flexType.setText("Flex 5v5");
-            Picasso.with(flexIcon.getContext()).load(getImage(profile.getFlex().getTier().toLowerCase()+profile.getFlex().getRank().toLowerCase())).into(flexIcon);
-            flexRank.setText(profile.getFlex().getTier()+" "+profile.getFlex().getRank());
-            flexPoints.setText(String.valueOf(profile.getFlex().getLeaguePoints())+" LP");
-            flexWR.setText(String.valueOf(profile.getFlex().getWins())+"/"+String.valueOf(profile.getFlex().getLosses()));
-        }
-        if(profile.getSolo() != null){
+        if(profile.getSolo() != null && !profile.getSolo().getRank().isEmpty()) {
             soloQType.setText("Solo/Duo");
-            Picasso.with(soloQIcon.getContext()).load(getImage(profile.getSolo().getTier().toLowerCase()+profile.getSolo().getRank().toLowerCase())).into(soloQIcon);
-            soloQRank.setText(profile.getSolo().getTier()+" "+profile.getSolo().getRank());
-            soloQPoints.setText(String.valueOf(profile.getSolo().getLeaguePoints())+" LP");
-            soloQWR.setText(String.valueOf(profile.getSolo().getWins())+"/"+String.valueOf(profile.getSolo().getLosses()));
+            Picasso.with(soloQIcon.getContext()).load(getImage(profile.getSolo().getTier().toLowerCase() + profile.getSolo().getRank().toLowerCase())).into(soloQIcon);
+            soloQRank.setText(profile.getSolo().getTier() + " " + profile.getSolo().getRank());
+            soloQPoints.setText(String.valueOf(profile.getSolo().getLeaguePoints()) + " LP");
+            soloQWR.setText(String.valueOf(profile.getSolo().getWins()) + "/" + String.valueOf(profile.getSolo().getLosses()));
+            if (profile.getFlex() != null && !profile.getFlex().getRank().isEmpty()) {
+                flexType.setText("Flex 5v5");
+                Picasso.with(flexIcon.getContext()).load(getImage(profile.getFlex().getTier().toLowerCase() + profile.getFlex().getRank().toLowerCase())).into(flexIcon);
+                flexRank.setText(profile.getFlex().getTier() + " " + profile.getFlex().getRank());
+                flexPoints.setText(String.valueOf(profile.getFlex().getLeaguePoints()) + " LP");
+                flexWR.setText(String.valueOf(profile.getFlex().getWins()) + "/" + String.valueOf(profile.getFlex().getLosses()));
+            }
         }
+        else if(profile.getFlex() != null && !profile.getFlex().getRank().isEmpty()){
+            soloQType.setText("Flex 5v5");
+            Picasso.with(soloQIcon.getContext()).load(getImage(profile.getFlex().getTier().toLowerCase()+profile.getFlex().getRank().toLowerCase())).into(soloQIcon);
+            soloQRank.setText(profile.getFlex().getTier()+" "+profile.getFlex().getRank());
+            soloQPoints.setText(String.valueOf(profile.getFlex().getLeaguePoints())+" LP");
+            soloQWR.setText(String.valueOf(profile.getFlex().getWins())+"/"+String.valueOf(profile.getFlex().getLosses()));
+        }
+
     }
 }

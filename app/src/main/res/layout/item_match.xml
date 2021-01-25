@@ -1,49 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="100"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:background="#DF5B5B"
+    android:weightSum="100">
 
     <ImageView
         android:id="@+id/champion_icon_match"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         tools:srcCompat="@tools:sample/avatars" />
-<RelativeLayout
-    android:layout_width="0dp"
-    android:layout_weight="40"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/queue_type_match"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginLeft="5dp"
-        android:layout_weight="30"
-        android:text="Soloq" />
-    <TextView
-        android:id="@+id/champion_name_match"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@+id/queue_type_match"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_weight="30"
-        android:text="Master Yi" />
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/background_win"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#DF5B5B" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/queue_type_match"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal"
+                android:text="Soloq"
+                android:textSize="24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <TextView
+                    android:id="@+id/champion_name_match"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/queue_type_match"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="40"
+                    android:text="Master Yi"
+                    android:textStyle="bold"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/score_match"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="30"
+                    android:textColor="#ffffff"
+                    android:text="15/6/5"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/cs_tw"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="30"
+                    android:textColor="#ffffff"
+                    android:text="150 CS"
+                    android:textSize="24dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/queue_type_match"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="40"
+                    android:text="Master Yi"
+                    android:textStyle="bold"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/kda_tw"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/queue_type_match"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="30"
+                    android:text="KDA 1.5"
+                    android:textStyle="bold"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/multikill_tw"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/queue_type_match"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ffffff"
+                    android:layout_weight="30"
+                    android:paddingLeft="5dp"
+                    android:text="Master Yi"
+                    android:textStyle="bold"
+                    android:textSize="14dp" />
+            </LinearLayout>
 
 
-</RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/score_match"
-        android:layout_width="0dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_weight="40"
-        android:text="15/6/5" />
 </LinearLayout>

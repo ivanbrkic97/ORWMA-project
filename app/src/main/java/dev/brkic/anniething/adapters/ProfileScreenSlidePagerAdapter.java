@@ -14,10 +14,12 @@ import java.util.Locale;
 
 import dev.brkic.anniething.R;
 import dev.brkic.anniething.fragments.ChampionRotationFragment;
+import dev.brkic.anniething.fragments.HistoryFragment;
 import dev.brkic.anniething.fragments.InfoFragment;
 import dev.brkic.anniething.fragments.MasteryFragment;
 import dev.brkic.anniething.fragments.StatusFragment;
 import dev.brkic.anniething.models.Mastery;
+import dev.brkic.anniething.models.MatchEntry;
 import dev.brkic.anniething.models.Profile;
 import dev.brkic.anniething.models.ProfileInfo;
 
@@ -28,12 +30,14 @@ public class ProfileScreenSlidePagerAdapter extends FragmentPagerAdapter {
     private final Context mContext;
     private Profile profileInfo;
     private List<Mastery> masteries;
+    private List<MatchEntry> entries;
 
-    public ProfileScreenSlidePagerAdapter(Context context, FragmentManager fm, Profile profileInfo, List<Mastery> masteries) {
+    public ProfileScreenSlidePagerAdapter(Context context, FragmentManager fm, Profile profileInfo, List<Mastery> masteries, List<MatchEntry> entries) {
         super(fm);
         mContext = context;
         this.profileInfo=profileInfo;
         this.masteries=masteries;
+        this.entries=entries;
     }
 
     @Override
@@ -43,9 +47,9 @@ public class ProfileScreenSlidePagerAdapter extends FragmentPagerAdapter {
                 infoFragment.setProfile(profileInfo);
                 return infoFragment;
             case 1:
-                InfoFragment infoFragment1 = InfoFragment.newInstance();
-                infoFragment1.setProfile(profileInfo);
-                return infoFragment1;
+                HistoryFragment historyFragment = HistoryFragment.newInstance();
+                historyFragment.setMasteries(entries);
+                return historyFragment;
             case 2:
                 MasteryFragment masteryFragment = MasteryFragment.newInstance();
                 masteryFragment.setMasteries(masteries);
