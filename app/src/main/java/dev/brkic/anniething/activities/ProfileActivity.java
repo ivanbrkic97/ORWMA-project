@@ -75,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.getSupportActionBar().hide();
         setContentView(R.layout.activity_profile);
+        progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         token=getString(R.string.token);
         Intent intent = getIntent();
@@ -263,38 +264,40 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setMatchData(MatchResponse response, Match match, boolean isLast){
         Integer id = 0;
-        for(ParticipantIdentity identity:response.getParticipantIdentities()){
-            if(identity.getPlayer().getSummonerId().equals(profileInfo.getId())) {
-                id=identity.getParticipantId();
+        if(response != null && response.getParticipantIdentities().size() >0) {
+            for (ParticipantIdentity identity : response.getParticipantIdentities()) {
+                if (identity.getPlayer().getSummonerId() != null && identity.getPlayer().getSummonerId().equals(profileInfo.getId())) {
+                    id = identity.getParticipantId();
+                }
             }
-        }
-        Participant participant = new Participant();
-        for(Participant part:response.getParticipants()){
-            if(part.getParticipantId()==id){
-                participant=part;
+            Participant participant = new Participant();
+            for (Participant part : response.getParticipants()) {
+                if (part.getParticipantId() == id) {
+                    participant = part;
+                }
             }
-        }
-        MatchEntry entry = new MatchEntry();
-        entry.setGameId(match.getGameId());
-        for(Champion champion:champions){
-            if(champion.getId() == match.getChampion()){
-                entry.setChampion(champion);
+            MatchEntry entry = new MatchEntry();
+            entry.setGameId(match.getGameId());
+            for (Champion champion : champions) {
+                if (champion.getId() == match.getChampion()) {
+                    entry.setChampion(champion);
+                }
             }
-        }
-        entry.setScore(String.valueOf(participant.getStats().getKills())+"/"+String.valueOf(participant.getStats().getDeaths())+"/"+String.valueOf(participant.getStats().getAssists()));
-        entry.setWin(participant.getStats().isWin());
-        entry.setKda((double)(participant.getStats().getKills()+participant.getStats().getAssists())/participant.getStats().getDeaths());
-        entry.setLevel("Level "+participant.getStats().getChampLevel());
-        entry.setLargestMultiKill(participant.getStats().getLargestMultiKill());
-        entry.setTotalMinionsKilled(participant.getStats().getTotalMinionsKilled());
-        for(Queue queue:queues){
-            if(queue.getQueueId()==match.getQueue()){
-                entry.setQueue(queue.getDescription().replace("games",""));
+            entry.setScore(String.valueOf(participant.getStats().getKills()) + "/" + String.valueOf(participant.getStats().getDeaths()) + "/" + String.valueOf(participant.getStats().getAssists()));
+            entry.setWin(participant.getStats().isWin());
+            entry.setKda((double) (participant.getStats().getKills() + participant.getStats().getAssists()) / participant.getStats().getDeaths());
+            entry.setLevel("Level " + participant.getStats().getChampLevel());
+            entry.setLargestMultiKill(participant.getStats().getLargestMultiKill());
+            entry.setTotalMinionsKilled(participant.getStats().getTotalMinionsKilled());
+            for (Queue queue : queues) {
+                if (queue.getQueueId() == match.getQueue()) {
+                    entry.setQueue(queue.getDescription().replace("games", ""));
+                }
             }
-        }
-        matcheEntries.add(entry);
-        if(isLast){
-            setProfileData();
+            matcheEntries.add(entry);
+            if (isLast) {
+                setProfileData();
+            }
         }
     }
 
@@ -323,10 +326,16 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getMatchHistoryData(MatchHistory history) {
-        matches=history.getMatches().subList(0,10);
-        matcheEntries=new ArrayList<>();
-        getMatch(matches,1,matches.size());
+        if (history != null && history.getMatches() != null && history.getMatches().size()>0) {
+            int maxSize = 10;
+            if(history.getMatches().size()<maxSize){
+                maxSize=history.getMatches().size();
+            }
+            matches = history.getMatches().subList(0, maxSize);
+            matcheEntries = new ArrayList<>();
+            getMatch(matches, 1, matches.size());
         }
+    }
 
     private void getMatchHistory(String accountId) {
         getMatchHistoryAPICall = NetworkUtils.getLOLApiInterface().getMatchHistory(token,accountId);
@@ -361,6 +370,7 @@ public class ProfileActivity extends AppCompatActivity {
                     getChampions();
                 }
                 else{
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getBaseContext(), "Profile information not found.", Toast.LENGTH_SHORT).show();
                     Log.i("Info:",response.toString());
                 }

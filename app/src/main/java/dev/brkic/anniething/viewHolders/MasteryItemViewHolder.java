@@ -32,28 +32,20 @@ public class MasteryItemViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.champion_icon);
     }
 
-    public int getImage(String imageName) {
-
-        int drawableResourceId = imageView.getContext().getResources().getIdentifier(imageName.replace(".png",""), "drawable", scoreTextView.getContext().getText(R.string.package_string).toString());
-
-        return drawableResourceId;
-    }
-
     public void  setArticle(Mastery article)
     {
-        if(article.getName() != null){
-        nameTextView.setText(article.getName());
-        levelTextView.setText(levelTextView.getContext().getText(R.string.level_string)+String.valueOf(article.getChampionLevel()));
-        scoreTextView.setText(String.valueOf(article.getChampionPoints())+scoreTextView.getContext().getText(R.string.points_string));
-        Picasso.with(imageView.getContext()).load(getImage(article.getImage().getName().toLowerCase())).into(imageView);
-        if(!article.isChestGranted()){
-            Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);
-            chest.setColorFilter(Color.GRAY);
-        }
-        else{
-            Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);
-            chest.clearColorFilter();
-        }
+        if(article.getName() != null) {
+            nameTextView.setText(article.getName());
+            levelTextView.setText(levelTextView.getContext().getText(R.string.level_string) + String.valueOf(article.getChampionLevel()));
+            scoreTextView.setText(String.valueOf(article.getChampionPoints()) + scoreTextView.getContext().getText(R.string.points_string));
+            Picasso.with(imageView.getContext()).load(imageView.getContext().getText(R.string.icon_link).toString() + article.getImage().getName()).into(imageView);
+            if (!article.isChestGranted()) {
+                Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);
+                chest.setColorFilter(Color.GRAY);
+            } else {
+                Picasso.with(chest.getContext()).load(R.drawable.chest).fit().into(chest);
+                chest.clearColorFilter();
+            }
         }
     }
 }

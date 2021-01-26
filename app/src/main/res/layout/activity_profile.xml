@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
+        android:background="?attr/colorPrimary"
         android:orientation="horizontal">
 
         <ImageView
@@ -31,8 +32,8 @@
             android:id="@+id/second_page_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
             app:tabSelectedTextColor="#CCCCCC"
+            android:background="?attr/colorPrimary"
             app:tabTextColor="#FFFFFF" />
 
     </LinearLayout>

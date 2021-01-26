@@ -39,22 +39,15 @@ public class HistoryItemViewHolder extends RecyclerView.ViewHolder {
         backgroundWin=itemView.findViewById(R.id.background_win);
     }
 
-    public int getImage(String imageName) {
-
-        int drawableResourceId = icon.getContext().getResources().getIdentifier(imageName.replace(".png","").replace(" ","").replace("&willump",""), "drawable", "dev.brkic.anniething");
-
-        return drawableResourceId;
-    }
-
     public void  setArticle(MatchEntry article)
     {
         if(article.getChampion().getName() != null){
             queueType.setText(article.getQueue());
-        championName.setText(article.getChampion().getName());
+        championName.setText(article.getChampion().getImage().getName().replace(".png",""));
         scoreTextView.setText(article.getScore());
         csTW.setText(String.valueOf(article.getTotalMinionsKilled())+csTW.getContext().getText(R.string.cs_string));
         level.setText(article.getLevel());
-        kda.setText(String.valueOf(article.getKda()).subSequence(0,2)+kda.getContext().getText(R.string.kda_string).toString());
+        kda.setText(String.valueOf(article.getKda()).subSequence(0,3)+kda.getContext().getText(R.string.kda_string).toString());
         if(article.getLargestMultiKill() == 2){
             multikill.setText(multikill.getContext().getText(R.string.double_kill));
         } else if(article.getLargestMultiKill() == 3) {
@@ -67,7 +60,7 @@ public class HistoryItemViewHolder extends RecyclerView.ViewHolder {
         else {
             multikill.setText("");
         }
-        Picasso.with(icon.getContext()).load(getImage(article.getChampion().getName().replace("'","").replace(" ","").toLowerCase())).into(icon);
+        Picasso.with(icon.getContext()).load(icon.getContext().getText(R.string.icon_link).toString()+article.getChampion().getImage().getName()).into(icon);
         if(article.isWin()){
             backgroundWin.setBackgroundColor(Color.argb(255, 100, 127, 69));
         }
