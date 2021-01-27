@@ -103,7 +103,7 @@ public class InfoFragment  extends Fragment {
         masteryScore.setText("Mastery score:"+String.valueOf(profile.getMasteryScore()));
         chest.setText("Chests Acquired:"+String.valueOf(profile.getChestDropped()));
         Picasso.with(profileBorder.getContext()).load(profile.getBorder().getImage().replace("http","https")).into(profileBorder);
-        Picasso.with(profileIcon.getContext()).load(getImage("icon"+String.valueOf(profile.getSummonerIcon()))).into(profileIcon);
+        Picasso.with(profileIcon.getContext()).load(profileIcon.getContext().getText(R.string.profile_icon_link).toString()+profile.getSummonerIcon().toString()+".png").into(profileIcon);
         if(profile.getSolo() != null && !profile.getSolo().getRank().isEmpty()) {
             soloQType.setText("Solo/Duo");
             Picasso.with(soloQIcon.getContext()).load(getImage(profile.getSolo().getTier().toLowerCase() + profile.getSolo().getRank().toLowerCase())).into(soloQIcon);
